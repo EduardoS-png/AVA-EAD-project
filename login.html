@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="/FrontEndAndLogic/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">
+                <i class="fas fa-user-circle"></i>
+                <h1>Login</h1>
+            </div>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i>
+                    </label>
+                    <input type="text" id="username" placeholder="Usuário ou E-mail" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                    </label>
+                    <input type="password" id="password" placeholder="Senha" required>
+                    <button type="button" class="show-password" id="showPassword">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                
+                <div class="remember-forgot">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember">
+                        <span class="checkmark"></span>
+                        Lembrar-me
+                    </label>
+                    <a href="#" class="forgot-link">Esqueceu a senha?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Entrar</button>
+                
+                <div class="separator">
+                    <span>ou</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i> Entrar com Google
+                    </button>
+                    <button type="button" class="social-btn github">
+                        <i class="fab fa-github"></i> Entrar com GitHub
+                    </button>
+                </div>
+                
+                <div class="register-link">
+                    Não tem uma conta? <a href="#">Cadastre-se</a>
+                </div>
+            </form>
+            
+            <div class="message" id="message"></div>
+        </div>
+    </div>
+    
+    <script src="/FrontEndAndLogic/javascript/login.js"></script>
+</body>
+</html>
