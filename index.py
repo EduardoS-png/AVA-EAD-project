@@ -1,12 +1,12 @@
 from flask import Flask, jsonify, render_template, redirect, session, request
 import os
-import openai
+from google import generativeai as genai
 import mysql.connector
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-openai.api_key = "AIzaSyDkZv8d6NKQcoqHF3j4QHMnPH76kLb1X24"
+genai.configure(api_key="AIzaSyDkZv8d6NKQcoqHF3j4QHMnPH76kLb1X24")
 
 def conectar():
     return mysql.connector.connect(
@@ -99,8 +99,8 @@ def semana_detalhes(numero):
     conteudos = cursor.fetchall()
 
     return render_template("semana_detalhe.html",
-                          semana=semana,
-                          conteudos=conteudos)
+                        semana=semana,
+                        conteudos=conteudos)
 
 @app.route("/chatbot", methods=["POST"])
 def chatbot():
@@ -112,16 +112,12 @@ def chatbot():
         return jsonify({"erro": "Pergunta vazia"}), 400
 
     try:
-        resposta = openai.ChatCompletion.create(
-            model="gemini-1.3",
-            messages=[
-                {"role": "system", "content": "Você é um assistente de estudo EAD para materiais de Pernambuco."},
-                {"role": "user", "content": pergunta}
-            ],
-            max_tokens=300
-        )
-        texto_resposta = resposta.choices[0].message.content
+        modelo = genai.GenerativeModel("models/gemini-2.5-flash")
+        resposta = modelo.generate_content(pergunta)
+
+        texto_resposta = resposta.text
         return jsonify({"resposta": texto_resposta})
+
     except Exception as e:
         return jsonify({"erro": str(e)}), 500
 
